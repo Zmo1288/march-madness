@@ -12,14 +12,14 @@ import { getDatabase, ref, set, get, onValue, remove } from 'firebase/database';
 // ══════════════════════════════════════════════════════════════
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
-  projectId: "YOUR_PROJECT",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "000000000000",
-  appId: "YOUR_APP_ID"
-};
+  apiKey: "AIzaSyDLPdDbK4nrTMfCNozvEriGznIsVH58EjQ",
+  authDomain: "seed-pts-march-madness-app.firebaseapp.com",
+  databaseURL: "https://seed-pts-march-madness-app-default-rtdb.firebaseio.com",
+  projectId: "seed-pts-march-madness-app",
+  storageBucket: "seed-pts-march-madness-app.firebasestorage.app",
+  messagingSenderId: "131780916355",
+  appId: "1:131780916355:web:c1c57d13e1686ccdd957b6",
+  measurementId: "G-PBGS0PTVM8"
 
 // ══════════════════════════════════════════════════════════════
 
