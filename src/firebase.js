@@ -1,0 +1,76 @@
+import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, set, get, onValue, remove } from 'firebase/database';
+
+// ══════════════════════════════════════════════════════════════
+// 🔧 PASTE YOUR FIREBASE CONFIG BELOW
+// ══════════════════════════════════════════════════════════════
+// 1. Go to https://console.firebase.google.com
+// 2. Create a new project (free tier is fine)
+// 3. Add a "Web app" to get your config
+// 4. Enable "Realtime Database" (start in test mode)
+// 5. Paste the config object below
+// ══════════════════════════════════════════════════════════════
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDLPdDbK4nrTMfCNozvEriGznIsVH58EjQ",
+  authDomain: "seed-pts-march-madness-app.firebaseapp.com",
+  databaseURL: "https://seed-pts-march-madness-app-default-rtdb.firebaseio.com",
+  projectId: "seed-pts-march-madness-app",
+  storageBucket: "seed-pts-march-madness-app.firebasestorage.app",
+  messagingSenderId: "131780916355",
+  appId: "1:131780916355:web:c1c57d13e1686ccdd957b6",
+  measurementId: "G-PBGS0PTVM8"
+
+// ══════════════════════════════════════════════════════════════
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// Storage API matching the artifact's interface
+export const storage = {
+  async get(key) {
+    try {
+      const snapshot = await get(ref(db, `contest/${key.replace(/[.#$/[\]]/g, '_')}`));
+      if (snapshot.exists()) {
+        return { key, value: snapshot.val() };
+      }
+      return null;
+    } catch (e) {
+      console.error('Firebase get error:', e);
+      return null;
+    }
+  },
+
+  async set(key, value) {
+    try {
+      const safeKey = key.replace(/[.#$/[\]]/g, '_');
+      await set(ref(db, `contest/${safeKey}`), value);
+      return { key, value };
+    } catch (e) {
+      console.error('Firebase set error:', e);
+      return null;
+    }
+  },
+
+  async delete(key) {
+    try {
+      const safeKey = key.replace(/[.#$/[\]]/g, '_');
+      await remove(ref(db, `contest/${safeKey}`));
+      return { key, deleted: true };
+    } catch (e) {
+      console.error('Firebase delete error:', e);
+      return null;
+    }
+  },
+
+  // Subscribe to real-time updates for a key
+  subscribe(key, callback) {
+    const safeKey = key.replace(/[.#$/[\]]/g, '_');
+    const unsubscribe = onValue(ref(db, `contest/${safeKey}`), (snapshot) => {
+      if (snapshot.exists()) {
+        callback(snapshot.val());
+      }
+    });
+    return unsubscribe;
+  }
+};
