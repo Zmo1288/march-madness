@@ -1,5 +1,6 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
-import { storage } from './firebase.js';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
 const firebaseConfig = {
   apiKey: "AIzaSyDLPdDbK4nrTMfCNozvEriGznIsVH58EjQ",
   authDomain: "seed-pts-march-madness-app.firebaseapp.com",
