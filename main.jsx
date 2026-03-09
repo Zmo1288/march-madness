@@ -1,5 +1,14 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { storage } from './firebase.js';
+const firebaseConfig = {
+  apiKey: "AIzaSyDLPdDbK4nrTMfCNozvEriGznIsVH58EjQ",
+  authDomain: "seed-pts-march-madness-app.firebaseapp.com",
+  databaseURL: "https://seed-pts-march-madness-app-default-rtdb.firebaseio.com",
+  projectId: "seed-pts-march-madness-app",
+  storageBucket: "seed-pts-march-madness-app.firebasestorage.app",
+  messagingSenderId: "131780916355",
+  appId: "1:131780916355:web:c1c57d13e1686ccdd957b6",
+  measurementId: "G-PBGS0PTVM8"
 
 // ── Constants ────────────────────────────────────────────────
 const REGIONS = ['South', 'East', 'Midwest', 'West'];
